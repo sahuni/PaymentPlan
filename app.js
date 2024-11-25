@@ -98,26 +98,28 @@ function generateTable(taskNumber, taskName, monthlyPayment, startDate, endDate,
     let start = new Date(startDate);
     let end = new Date(endDate);
     let totalAmount = 0;
-
+    let rowIndex = 0;
+	
     while (start <= end) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td style="width: 80px;">
               ${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, '0')}
-              <input type="hidden" class="form-control taskNumber" value="${taskNumber}">
-              <input type="hidden" class="form-control taskName" value="${taskName}">
-              <input type="hidden" class="form-control taskResearcherId" value="${taskResearcherId}">
-              <input type="hidden" class="form-control taskResearcherName" value="${taskResearcherName}">
-              <input type="hidden" class="form-control taskPrincipalName" value="${taskPrincipalName}">
-              <input type="hidden" class="form-control taskPrincipalName" value="${taskAssignName}">
+              <input type="hidden" class="form-control taskNumber" name="${tableId}[${rowIndex}][taskNumber]" value="${taskNumber}">
+              <input type="hidden" class="form-control taskName" name="${tableId}[${rowIndex}][taskName]" value="${taskName}">
+              <input type="hidden" class="form-control taskResearcherId" name="${tableId}[${rowIndex}][taskResearcherId]" value="${taskResearcherId}">
+              <input type="hidden" class="form-control taskResearcherName" name="${tableId}[${rowIndex}][taskResearcherName]" value="${taskResearcherName}">
+              <input type="hidden" class="form-control taskPrincipalName" name="${tableId}[${rowIndex}][taskPrincipalName]" value="${taskPrincipalName}">
+              <input type="hidden" class="form-control taskPrincipalName" name="${tableId}[${rowIndex}][taskAssignName]" value="${taskAssignName}">
             </td>
-            <td><input type="number" class="form-control paymentInput" value="${Math.round(monthlyPayment)}"></td>
-            <td><input type="text" class="form-control ratioInput" readonly></td>
+            <td><input type="number" class="form-control paymentInput" name="${tableId}[${rowIndex}][monthlyPayment]" value="${Math.round(monthlyPayment)}"></td>
+            <td><input type="text" class="form-control ratioInput" name="${tableId}[${rowIndex}][period]" readonly></td>
         `;
         tbody.appendChild(row);
 
         totalAmount += Math.round(monthlyPayment);
         start.setMonth(start.getMonth() + 1); // 다음 달로 이동
+	rowIndex++;
     }
 
     // 합계 행 추가
