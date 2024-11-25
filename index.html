@@ -85,8 +85,10 @@
     <div id="totalAverageContainer" class="mb-4"></div>
 
     <!-- Table Container -->
-    <div id="tableContainer" class="row mt-3"></div>
-
+    <form id="subjectForm" action="/api/submit-tables" method="POST">
+       <div id="tableContainer" class="row mt-3"></div>
+    </form>
+    <button type="submit" class="btn btn-primary">테이블 저장</button>
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.3.0/dist/exceljs.min.js"></script>
     <script src="app.js"></script>
 </body>
